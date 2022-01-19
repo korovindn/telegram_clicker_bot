@@ -1,0 +1,22 @@
+{
+  "name": "telegraf_bot",
+  "version": "1.0.0",
+  "description": "clicker bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "nodemon bot"
+  },
+  "keywords": [
+    "telegraf",
+    "bot",
+    "telegram"
+  ],
+  "author": "Dmitry Korovin",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^6.1.6",
+    "nodemon": "^2.0.15",
+    "qiwi-sdk": "^2.2.0",
+    "telegraf": "^4.6.0"
+  }
+}
