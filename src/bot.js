@@ -1,12 +1,10 @@
 const { Telegraf, Markup, session, Scenes: { Stage } } = require('telegraf')
 const config = require('../config.json') 
-const db = require ('./db')
 
 const bonusHandler = require('./handlers/bonusHandler')
 const clickHandler = require('./handlers/clickHandler')
 const ratingHandler = require('./handlers/ratingHandler')
 const startHandler = require('./handlers/startHandler')
-const referralHandler = require('./handlers/referralHandler')
 
 const editWithdrawScene = require('./scenes/editWithdrawScene')
 const videoScene = require('./scenes/videoScene')
@@ -41,7 +39,7 @@ const initialize = () => {
 
     bot.hears('Рейтинг', async ctx => ratingHandler(ctx))
 
-    bot.hears('В начало', async (ctx) => await ctx.reply(`Главное меню:`, Markup.keyboard(mainKeyboard).resize()))
+    bot.hears('В начало', async ctx => await ctx.reply(`Главное меню:`, Markup.keyboard(mainKeyboard).resize()))
 
     bot.start(async ctx => startHandler(ctx))
 
