@@ -32,7 +32,7 @@ const bonusHandler = async (ctx) => {
                         }
                     }
                 )
-                await ctx.reply(`💸 Бонус начислен.\nБаланс на вывод пополнен на ${bonusValue} ₽.\n💰Текущий баланс: ${user.balance.toFixed(2)} ₽\n💴 Доступно на вывод : ${(user.money+bonusValue).toFixed(2)} ₽`)
+                await ctx.replyWithMarkdown(`💸 Бонус начислен.\nБаланс на вывод пополнен на *${bonusValue} ₽*.\n💰Текущий баланс: *${user.balance.toFixed(2)} ₽*\n💴 Доступно на вывод : *${(user.money+bonusValue).toFixed(2)} ₽*`)
             } else {
                 const options = []
                 if(10 - user.videos > 0){
@@ -41,7 +41,7 @@ const bonusHandler = async (ctx) => {
                 if(superTotal - user.super > 0){
                     options.push([Markup.button.callback(`Осталось суперзаданий: ${superTotal - user.super}`, '1')])
                 }
-                ctx.reply('Чтобы получить Бонус, нужно выполнить все ежедневные “Суперзадания” и выполнить задание “Видео” минимум 10 раз', Markup.inlineKeyboard(options))
+                ctx.reply('❗Чтобы получить "Бонус" нужно выполнить "Видео" минимум 10 раз и все ежедневные "Суперзадания"❗', Markup.inlineKeyboard(options))
             }
 
         } else if(user.bonusesToday > 0) {
@@ -57,7 +57,7 @@ const bonusHandler = async (ctx) => {
                         }
                     }
                 )
-                ctx.reply(`💸 Бонус начислен.\nБаланс на вывод пополнен на ${bonusValue} ₽.\n💰Текущий баланс: ${user.balance.toFixed(2)} ₽\n💴 Доступно на вывод : ${(user.money+bonusValue).toFixed(2)} ₽\nОсталось бонусов сегодня: ${user.bonusesToday - 1}`)
+                ctx.replyWithMarkdown(`💸 Бонус начислен.\nБаланс на вывод пополнен на *${bonusValue} ₽*.\n💰Текущий баланс: *${user.balance.toFixed(2)} ₽*\n💴 Доступно на вывод : *${(user.money+bonusValue).toFixed(2)} ₽*\nОсталось бонусов сегодня: *${user.bonusesToday - 1}*`)
             } else {
                 ctx.reply(`До получения следующего бонуса осталось:`, Markup.inlineKeyboard([
                     Markup.button.callback(`${15-user.videos} видео`, '0')

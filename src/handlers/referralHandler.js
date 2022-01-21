@@ -4,16 +4,11 @@ const config = require('../../config.json')
 const referralHandler = async (ctx) => {
     try{
         const referrals = await db.user.find({ referral: ctx.from.id })
-        let reply = `Ваша реферальная ссылка https://t.me/${config.LINK}?start=${ctx.from.id}`
-        if(referrals.length>0){
-            reply = reply + `\nВы пригласили:`
-        } else {
-            reply = reply + `\nВы ещё никого не пригласили`
-        }
+        let reply = `🏦 Ваша реферальная ссылка https://t.me/${config.LINK}?start=${ctx.from.id}\n\n👨‍👨‍👦 Приглашенные пользователи:\n\n`
         for(let i=0; i<referrals.length; i++){
-            reply = reply + `\n${i+1}. ${referrals[i].name} (id: ${referrals[i].id})`
+            reply = reply + `<b>${i+1}. ${referrals[i].name}</b> (id: ${referrals[i].id})\n`
         }
-        await ctx.reply(reply)
+        await ctx.replyWithHTML(reply)
     } catch (e){
         console.log(e)
     }

@@ -15,7 +15,7 @@ superScene.enter(async (ctx) => {
             console.log(await telegram.getChatMember(channels[i].link, ctx.from.id))
             const member = await telegram.getChatMember(channels[i].link, ctx.from.id)
             if(!(user.channels.includes(channels[i].link)) && (member.status === 'left')){
-                await ctx.reply(`Внимание❗\nНельзя отписываться от телеграмм каналов.\nВ случае нарушения, с баланса пользователя будут сняты средства!`, Markup.keyboard(superKeyboard).resize())
+                await ctx.reply(`Внимание❗\nНельзя отписываться от телеграм каналов.\n\n❗В случае нарушения, с баланса пользователя будут изъяты заработанные средства❗`, Markup.keyboard(superKeyboard).resize())
                 await ctx.reply(`Подпишитесь на канал ${channels[i].link}`)
                 ctx.session.channel = channels[i].link
                 notFound = false
@@ -50,7 +50,7 @@ superScene.hears('Проверить', async (ctx) => {
                     }
                 }
             )
-            await ctx.reply(`💸 Суперзадание засчитано.\nБаланс пополнен на 1 ₽.\n💰Текущий баланс: ${(user.balance+1).toFixed(2)} ₽\n💴 Доступно на вывод : ${(user.money).toFixed(2)} ₽`, Markup.keyboard(mainKeyboard).resize())
+            await ctx.replyWithMarkdown(`💸 Суперзадание засчитано.\nБаланс пополнен на *1 ₽*.\n💰Текущий баланс: *${(user.balance+1).toFixed(2)} ₽*\n💴 Доступно на вывод: *${(user.money).toFixed(2)} ₽*`, Markup.keyboard(mainKeyboard).resize())
             return ctx.scene.leave()
         } else {
             ctx.reply(`Задание не выполнено❗ Подпишитесь на канал`)

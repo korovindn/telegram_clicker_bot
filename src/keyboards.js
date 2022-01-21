@@ -10,7 +10,7 @@ module.exports = {
         ['В начало']
     ],
     videoKeyboard: [
-        ['Посмотрел'],
+        ['Выполнил'],
         ['В начало']
     ],
     withdrawKeyboard: [

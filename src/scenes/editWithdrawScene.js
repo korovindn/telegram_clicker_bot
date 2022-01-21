@@ -24,7 +24,7 @@ const accountHandler = Telegraf.hears(/[0-9]/, async (ctx) => {
                 }
             }
         )
-        await ctx.reply(`Установлен кошелек ${ctx.scene.state.provider}: ${account}`, Markup.keyboard(mainKeyboard).resize())
+        await ctx.reply(`Установлен кошелек ${ctx.scene.state.provider.charAt(0).toUpperCase() + ctx.scene.state.provider.slice(1)}: ${account}`, Markup.keyboard(mainKeyboard).resize())
         return ctx.scene.leave()
     }catch(e){
         console.log(e)
@@ -36,7 +36,7 @@ const editWithdrawScene = new WizardScene('editWithdrawScene', providerHandler, 
 
 editWithdrawScene.enter(async (ctx) => {
     try{
-        await ctx.reply('Выберите платежную систему:',Markup.keyboard([
+        await ctx.reply('🏦 Выберите платежную систему:',Markup.keyboard([
             ['qiwi'],
             ['yoomoney']
         ]).resize())

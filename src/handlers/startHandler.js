@@ -19,7 +19,8 @@ const startHandler = async (ctx) => {
                     bonusesToday: 4,
                     provider: '',
                     account: '',
-                    referral: ctx.message.text.split(' ')[1]
+                    referral: ctx.message.text.split(' ')[1],
+                    fromReferrals: 0
                 });
                 newUser.save();
             } else {
@@ -36,7 +37,8 @@ const startHandler = async (ctx) => {
                     bonusesToday: 4,
                     provider: '',
                     account: '',
-                    referral: 0
+                    referral: 0,
+                    fromReferrals: 0
                 });
                 newUser.save();
             }

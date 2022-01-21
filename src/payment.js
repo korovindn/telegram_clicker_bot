@@ -3,7 +3,7 @@ const config = require("../config.json")
 
 const qiwi = new Personal(config.QIWI)
 
-async function sendPayment(method, account, amount) {
+async function sendPayment(method, account, amount, commentText) {
     let provider = 0
     if (method === 'qiwi'){
         provider = 99
@@ -22,7 +22,7 @@ async function sendPayment(method, account, amount) {
         account,
         provider,
         currency: Currency.RUB,
-        comment: "Подарок"
+        comment: commentText
     })
 }
 

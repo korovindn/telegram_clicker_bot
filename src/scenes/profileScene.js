@@ -7,11 +7,15 @@ const profileScene = new BaseScene('profileScene')
 profileScene.enter(async (ctx) => {
     try {
         const user = await db.user.findOne({ id: ctx.from.id })
-        let reply = `Ваш профиль:\n👤 ${user.name}\n 💰Текущий баланс: ${(user.balance).toFixed(2)} ₽\n💴 Доступно на вывод : ${user.money} ₽\nОчков за сегодня: ${user.points}`
+        let reply = `Ваш профиль: \n\n👤 ${user.name} \n💰Текущий баланс: <b>${(user.balance).toFixed(2)} ₽</b> \n💴 Доступно на вывод: <b>${user.money} ₽</b> \n💯 Очков рейтинга: <b>${user.points}</b>`
         if(user.account){
-            reply = reply + `\nПриязан кошелек ${user.provider}: ${user.account}`
+            reply = reply + `\n💳 Приязанный кошелек <b>${user.provider.charAt(0).toUpperCase() + user.provider.slice(1)}</b>: <b>${user.account}</b>`
         }
-        ctx.reply(reply, Markup.keyboard(profileKeyboard).resize())
+        const referrals = await db.user.find({ referral: ctx.from.id })
+        if(referrals.length){
+            reply = reply + `\n\n👨‍👨‍👦 Приглашенных пользователей: <b>${referrals.length}</b>\n💵 Заработано с рефералов: <b>${user.fromReferrals}</b> `
+        }
+        ctx.replyWithHTML(reply, Markup.keyboard(profileKeyboard).resize())
     } catch (e){
         console.log(e)
     }

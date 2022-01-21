@@ -19,7 +19,8 @@ const user = mongoose.model('user', {
     bonusesToday: Number,
     provider: String,
     account: String,
-    referral: Number
+    referral: Number,
+    fromReferrals: Number
 })
 
 const channel = mongoose.model('chanel', { 
