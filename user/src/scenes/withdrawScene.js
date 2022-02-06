@@ -5,6 +5,7 @@ const payment = require('../payment')
 const config = require ('../../../config.json')
 
 const telegram = new Telegram(config.TOKEN)
+let paymentCounter = 1
 
 const withdrawScene = new BaseScene('withdrawScene')
 withdrawScene.enter(async (ctx) => {
@@ -33,10 +34,11 @@ withdrawScene.hears(/[0-9]/, async (ctx) => {
         const user = await db.user.findOne({ id: ctx.from.id })
         if (sum>=50){
             if (sum <= user.money && sum <= user.balance){
-                let comment = `Clickerio`
+                let comment = `Вывод ${paymentCounter}`
                 payment.send(user.provider, user.account, sum, comment).then(async res => {
                     if(res.transaction.state.code === 'Accepted'){
                         await ctx.replyWithMarkdown(`Запрос на вывод *${sum} ₽*\n🏦 Платежная система: *${user.provider.charAt(0).toUpperCase() + user.provider.slice(1)}*\n💳 Номер кошелька: *${user.account}*\n\n❗Ожидайте поступление в течение 24 часов❗`, Markup.keyboard(mainKeyboard).resize())
+                        paymentCounter = paymentCounter + 1
                         await db.user.updateOne(
                             {id: ctx.from.id},
                             {

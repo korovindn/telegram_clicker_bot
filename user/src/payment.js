@@ -26,6 +26,8 @@ async function sendPayment(method, account, amount, commentText) {
     })
 }
 
+
+
 module.exports = {
     send: sendPayment,
 }
